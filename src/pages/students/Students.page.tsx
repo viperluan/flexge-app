@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import styles from './Students.module.scss';
 
 function Students() {
@@ -18,10 +20,10 @@ function Students() {
             </button>
           </div>
 
-          <button>
+          <Link to="/students/new">
             <img src="icons/plus-icon.svg" alt="Plus icon" />
             <p>New</p>
-          </button>
+          </Link>
         </div>
       </header>
 
