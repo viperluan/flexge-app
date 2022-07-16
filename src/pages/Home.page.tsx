@@ -11,7 +11,14 @@ function Home() {
       <div className={styles.loginContainer}>
         <p>Sign in with your Flexge account</p>
 
-        <form method="POST">
+        <form
+          method="POST"
+          onSubmit={(event) => {
+            event.preventDefault();
+            const actualLocation = window.location.origin;
+            window.location.assign(`${actualLocation}/students`);
+          }}
+        >
           <div className={styles.inputContainer}>
             <input type="email" placeholder="E-mail" required />
           </div>
