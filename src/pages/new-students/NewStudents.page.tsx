@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { InputSelect } from '../../components/inputs/InputSelect';
 import { InputText } from '../../components/inputs/InputText';
 import styles from './NewStudents.module.scss';
@@ -9,6 +11,10 @@ const schools = ['School 1', 'School 2', 'School 3', 'School 4', 'School 5'];
 function NewStudents() {
   return (
     <div className={styles.container}>
+      <Link to="/students">
+        <img src="../icons/arrow-back-icon.svg" alt="arrow" />
+      </Link>
+
       <h1>New Student</h1>
 
       <div className={styles.studentNameAndAge}>
