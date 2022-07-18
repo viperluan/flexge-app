@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const INITIAL_STATE = { email: '', password: '', token: '' };
+const INITIAL_STATE = { email: '', token: '' };
 
 export const authenticateSlice = createSlice({
   name: 'authenticate',
