@@ -27,10 +27,12 @@ function Students() {
 
   async function tryDeleteStudent(student: any) {
     try {
-      dispatch(deleteOneStudent(student));
       const { status } = await deleteStudent(student);
 
-      if (status === 204) alert('Aluno deletado com sucesso.');
+      if (status === 204) {
+        alert('Aluno deletado com sucesso.');
+        dispatch(deleteOneStudent(student));
+      }
     } catch (error) {
       console.log(error);
     }
