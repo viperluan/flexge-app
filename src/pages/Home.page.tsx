@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -10,24 +11,40 @@ import styles from './Home.module.scss';
 function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [cookies, setCookie] = useCookies();
+  const { token, emailOnCookies } = cookies;
+
+  useEffect(() => {
+    if (token) {
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      dispatch(login({ token, emailOnCookies }));
+      navigate('/students');
+    }
+  }, []);
 
   async function tryLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
       const { data } = await postLogin({ email, password });
-      const { token } = data;
+      const { token, status, message } = data;
+
+      if (status === 'Erro') alert(message);
 
       if (token) {
         api.defaults.headers.common.Authorization = `Bearer ${token}`;
-        dispatch(login({ email, password, token }));
+        dispatch(login({ email, token }));
+        setCookie('token', token);
+        setCookie('email', email);
+
+        alert(message);
+
         navigate('/students');
       }
     } catch (error) {
-      alert(error);
+      console.error(error);
     }
   }
 
