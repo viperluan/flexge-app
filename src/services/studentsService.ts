@@ -27,4 +27,10 @@ const editStudent = async (student: IStudentData) => {
   return response;
 };
 
-export { getStudents, createStudent, editStudent };
+const deleteStudent = async ({ _id }: IStudentData) => {
+  const response = await api.delete(`/students/${_id}`);
+
+  return response;
+};
+
+export { getStudents, createStudent, editStudent, deleteStudent };
