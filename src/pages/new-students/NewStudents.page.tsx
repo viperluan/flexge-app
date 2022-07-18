@@ -83,7 +83,6 @@ function NewStudents() {
       setAge('');
       setCourse('PRE A1');
       setSchool('School 1');
-      setIsEdit(true);
       return;
     }
 
