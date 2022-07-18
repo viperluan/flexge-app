@@ -7,12 +7,8 @@ export const authenticateSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     login: (state, action) => {
-      if (action.type === 'authenticate/login') {
-        const { payload } = action;
-        return payload;
-      }
-
-      return state;
+      const { payload } = action;
+      return payload;
     },
     logout: () => INITIAL_STATE,
   },

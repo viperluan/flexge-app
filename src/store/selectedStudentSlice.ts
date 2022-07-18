@@ -21,12 +21,8 @@ export const selectedStudentSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     selectStudent: (state, action) => {
-      if (action.type === 'selectedStudent/selectStudent') {
-        const { payload } = action;
-        return payload;
-      }
-
-      return state;
+      const { payload } = action;
+      return payload;
     },
     cleanSelectedStudent: () => {
       return INITIAL_STATE;
