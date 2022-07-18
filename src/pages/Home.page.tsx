@@ -36,8 +36,8 @@ function Home() {
       if (token) {
         api.defaults.headers.common.Authorization = `Bearer ${token}`;
         dispatch(login({ email, token }));
-        setCookie('token', token);
-        setCookie('email', email);
+        setCookie('token', token, { path: '/' });
+        setCookie('email', email, { path: '/' });
 
         alert(message);
 
