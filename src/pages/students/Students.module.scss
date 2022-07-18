@@ -1,0 +1,155 @@
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  height: 100%;
+  padding: 40px 20px;
+
+  button {
+    cursor: pointer;
+  }
+
+  header, header > h1 {
+    margin-bottom: 40px;
+  }
+
+  .searchAndNewContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button > img, a > img {
+      width: 20px;
+      height: 20px;
+    }
+
+    button, a {
+      height: 40px;
+      width: 180px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background-color: #0d4155;
+      border: 1px solid #00786a;
+      border-radius: 10px;
+      color: #fff;
+      text-decoration: none;
+
+      &:hover {
+        filter: brightness(1.2);
+        transition: all .2s ease;
+      }
+
+      p {
+        margin-left: 10px;
+        font-size: 20px;
+      }
+    }
+
+    .searchContainer {
+      width: 70%;
+      height: 40px;
+      display: flex;
+      align-items: center;
+
+      .inputContainer {
+        max-width: 480px;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        border: 1px solid #6dbfb5;
+        background-color: #daedeb;
+        padding: 0 20px;
+        margin-right: 20px;
+
+        input {
+          background-color: transparent;
+          border: none;
+          width: 100%;
+          height: 100%;
+          border-radius: 10px;
+          outline: none;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  main table {
+    background-color: #fff;
+    width: 100%;
+
+    border-spacing: 0px;
+    border-radius: 10px;
+    border: 1px solid #0d4155;
+    overflow: hidden;
+
+    thead {
+      background-color: #daedeb;
+      height: 40px;
+
+      th {
+        border-bottom: 1px solid #0d4155;
+        border-right: 1px solid #0d4155;
+        text-align: left;
+        padding-left: 20px;
+      }
+
+      th:last-child {
+        border-right: none;
+      }
+    }
+
+    tbody {
+      color: #fff;
+
+      tr {
+        height: 60px;
+      }
+
+      tr:nth-child(odd) {
+        background-color: #567a88;
+      }
+
+      tr:nth-child(even) {
+        background-color: #265466;
+      }
+
+      td {
+        border-right: 1px solid #0d4155;
+        text-align: left;
+        padding-left: 20px;
+      }
+
+      td:last-child {
+        border-right: none;
+        padding-left: 0;
+        height: 60px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button {
+          background: transparent;
+          border: none;
+
+          & + button {
+            margin-left: 20px;
+          }
+
+          & > img {
+            width: 30px;
+            height: 30px;
+          }
+
+          &:hover {
+            filter: brightness(0);
+            transition: all .2s ease;
+          }
+        }
+      }
+    }
+  }
+}
