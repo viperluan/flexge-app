@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 
 import { AppRoutes } from './Routes';
+import api from './services/api';
 import { login } from './store/authenticateSlice';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
   useEffect(() => {
     if (token) {
       dispatch(login({ token, email }));
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
     }
   }, []);
 
