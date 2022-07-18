@@ -13,8 +13,12 @@ function InputSelect({ htmlFor, label, width, options }: IInputSelectProps) {
       <label htmlFor={htmlFor}>{label}</label>
       <div className={styles.inputContainer}>
         <select>
-          {options.map((option) => {
-            return <option value={option}>{option}</option>;
+          {options.map((option, index) => {
+            return (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            );
           })}
         </select>
       </div>
