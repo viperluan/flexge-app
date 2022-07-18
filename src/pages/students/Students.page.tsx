@@ -2,12 +2,16 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { getStudents } from '../../services/studentsService';
+import { deleteStudent, getStudents } from '../../services/studentsService';
 import {
   cleanSelectedStudent,
   selectStudent,
 } from '../../store/selectedStudentSlice';
-import { IStudentsData, loadStudents } from '../../store/studentsSlice';
+import {
+  IStudentsData,
+  fetchStudentsList,
+  deleteOneStudent,
+} from '../../store/studentsSlice';
 import styles from './Students.module.scss';
 
 function Students() {
@@ -19,6 +23,17 @@ function Students() {
   function editStudent(student: any) {
     dispatch(selectStudent(student));
     navigate('/students/new');
+  }
+
+  async function tryDeleteStudent(student: any) {
+    try {
+      dispatch(deleteOneStudent(student));
+      const { status } = await deleteStudent(student);
+
+      if (status === 204) alert('Aluno deletado com sucesso.');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
@@ -33,7 +48,9 @@ function Students() {
       return response;
     }
 
-    callGetStudents().then(({ data }) => dispatch(loadStudents(data.students)));
+    callGetStudents().then(({ data }) =>
+      dispatch(fetchStudentsList(data.students))
+    );
   }, []);
 
   return (
@@ -88,7 +105,7 @@ function Students() {
                     <button onClick={() => editStudent(student)}>
                       <img src="icons/edit-icon.svg" alt="Edit button" />
                     </button>
-                    <button>
+                    <button onClick={() => tryDeleteStudent(student)}>
                       <img src="icons/trash-icon.svg" alt="Trash icon" />
                     </button>
                   </td>

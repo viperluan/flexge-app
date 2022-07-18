@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface IStudentsData {
@@ -14,17 +15,21 @@ export const studentsSlice = createSlice({
   name: 'students',
   initialState: INITIAL_STATE,
   reducers: {
-    loadStudents: (state, action) => {
-      if (action.type === 'students/loadStudents') {
-        const { payload } = action;
-        return payload;
-      }
+    fetchStudentsList: (state, action) => {
+      const { payload } = action;
 
-      return state;
+      return payload;
+    },
+    deleteOneStudent: (state, action) => {
+      const { payload } = action;
+
+      const filteredStudents = state.filter(({ _id }) => _id !== payload._id);
+
+      return filteredStudents;
     },
   },
 });
 
-export const { loadStudents } = studentsSlice.actions;
+export const { fetchStudentsList, deleteOneStudent } = studentsSlice.actions;
 
 export default studentsSlice.reducer;
