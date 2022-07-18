@@ -11,6 +11,7 @@ interface IInputTextProps {
   min?: number;
   value?: string | number;
   width?: string | number;
+  setState?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function InputText({
@@ -24,6 +25,7 @@ function InputText({
   min,
   value,
   width,
+  setState,
 }: IInputTextProps) {
   return (
     <div className={styles.container} style={{ width }}>
@@ -37,6 +39,11 @@ function InputText({
           value={value}
           max={max}
           min={min}
+          onChange={(event) => {
+            const { value } = event.target;
+
+            if (setState) setState(value);
+          }}
         />
       </div>
     </div>
