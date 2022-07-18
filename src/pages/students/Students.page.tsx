@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { getStudents } from '../../services/studentsService';
+import {
+  cleanSelectedStudent,
+  selectStudent,
+} from '../../store/selectedStudentSlice';
 import { IStudentsData, loadStudents } from '../../store/studentsSlice';
 import styles from './Students.module.scss';
 
@@ -11,6 +15,11 @@ function Students() {
   const students: IStudentsData[] = useSelector((state: any) => state.students);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  function editStudent(student: any) {
+    dispatch(selectStudent(student));
+    navigate('/students/new');
+  }
 
   useEffect(() => {
     if (!user.token) {
@@ -44,7 +53,10 @@ function Students() {
             </button>
           </div>
 
-          <Link to="/students/new">
+          <Link
+            to="/students/new"
+            onClick={() => dispatch(cleanSelectedStudent())}
+          >
             <img src="icons/plus-icon.svg" alt="Plus icon" />
             <p>New</p>
           </Link>
@@ -73,7 +85,7 @@ function Students() {
                   <td>{course}</td>
                   <td>{school}</td>
                   <td className={styles.actionsContainer}>
-                    <button>
+                    <button onClick={() => editStudent(student)}>
                       <img src="icons/edit-icon.svg" alt="Edit button" />
                     </button>
                     <button>
