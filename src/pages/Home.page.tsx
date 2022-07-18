@@ -1,8 +1,8 @@
-import axios from 'axios';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
+import api from '../services/api';
 import { postLogin } from '../services/authenticateService';
 import { login } from '../store/authenticateSlice';
 import styles from './Home.module.scss';
@@ -22,7 +22,7 @@ function Home() {
       const { token } = data;
 
       if (token) {
-        axios.defaults.headers.common.Authorization = token;
+        api.defaults.headers.common.Authorization = `Bearer ${token}`;
         dispatch(login({ email, password, token }));
         navigate('/students');
       }
