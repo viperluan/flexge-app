@@ -1,8 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { deleteStudent, getStudents } from '../../services/studentsService';
+import {
+  deleteStudent,
+  getStudents,
+  getStudentsByName,
+} from '../../services/studentsService';
 import {
   cleanSelectedStudent,
   selectStudent,
@@ -19,6 +23,26 @@ function Students() {
   const students: IStudentsData[] = useSelector((state: any) => state.students);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [inputName, setInputName] = useState('');
+  const [firstFetch, setFirstFetch] = useState(true);
+
+  async function callGetStudents() {
+    const { data } = await getStudents();
+
+    dispatch(fetchStudentsList(data.students));
+  }
+
+  async function findByName(event: React.FormEvent<HTMLFormElement>) {
+    try {
+      event.preventDefault();
+      const { data } = await getStudentsByName(inputName);
+      const { students } = data;
+
+      dispatch(fetchStudentsList(students));
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   function editStudent(student: any) {
     dispatch(selectStudent(student));
@@ -39,21 +63,13 @@ function Students() {
   }
 
   useEffect(() => {
-    if (!user.token) {
-      navigate('/');
-      return;
+    if (user.token && firstFetch) {
+      callGetStudents();
+      setFirstFetch(false);
+    } else if (user.token && !inputName) {
+      callGetStudents();
     }
-
-    async function callGetStudents() {
-      const response = await getStudents();
-
-      return response;
-    }
-
-    callGetStudents().then(({ data }) =>
-      dispatch(fetchStudentsList(data.students))
-    );
-  }, []);
+  }, [user, inputName]);
 
   return (
     <div className={styles.container}>
@@ -61,16 +77,25 @@ function Students() {
         <h1>Students</h1>
 
         <div className={styles.searchAndNewContainer}>
-          <div className={styles.searchContainer}>
+          <form
+            method="POST"
+            onSubmit={findByName}
+            className={styles.searchContainer}
+          >
             <div className={styles.inputContainer}>
-              <input type="text" placeholder="Find by name..." />
+              <input
+                type="text"
+                placeholder="Find by name..."
+                value={inputName}
+                onChange={(event) => setInputName(event.target.value)}
+              />
             </div>
 
-            <button>
+            <button type="submit">
               <img src="icons/glass-icon.svg" alt="Glass icon" />
               <p>Search</p>
             </button>
-          </div>
+          </form>
 
           <Link
             to="/students/new"
