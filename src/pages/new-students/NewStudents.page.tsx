@@ -122,7 +122,7 @@ function NewStudents() {
             label="Age"
             htmlFor="age"
             placeholder="Student age..."
-            min={0}
+            min={1}
             max={120}
             width="30%"
             value={age}
