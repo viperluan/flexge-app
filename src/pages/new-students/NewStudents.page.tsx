@@ -121,7 +121,7 @@ function NewStudents() {
             type="number"
             label="Age"
             htmlFor="age"
-            placeholder="Student name..."
+            placeholder="Student age..."
             min={0}
             max={120}
             width="30%"
