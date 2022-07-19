@@ -15,6 +15,12 @@ const getStudents = async () => {
   return response;
 };
 
+const getStudentsByName = async (name: string) => {
+  const response = await api.get(`/students/?name=${name}`);
+
+  return response;
+};
+
 const createStudent = async (student: IStudentData) => {
   const response = await api.post('/students', student);
 
@@ -33,4 +39,10 @@ const deleteStudent = async ({ _id }: IStudentData) => {
   return response;
 };
 
-export { getStudents, createStudent, editStudent, deleteStudent };
+export {
+  getStudents,
+  createStudent,
+  editStudent,
+  deleteStudent,
+  getStudentsByName,
+};
