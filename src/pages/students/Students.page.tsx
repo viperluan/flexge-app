@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -7,6 +9,7 @@ import {
   getStudents,
   getStudentsByName,
 } from '../../services/studentsService';
+import { logout } from '../../store/authenticateSlice';
 import {
   cleanSelectedStudent,
   selectStudent,
@@ -23,13 +26,22 @@ function Students() {
   const students: IStudentsData[] = useSelector((state: any) => state.students);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies();
   const [inputName, setInputName] = useState('');
   const [firstFetch, setFirstFetch] = useState(true);
 
   async function callGetStudents() {
-    const { data } = await getStudents();
+    try {
+      const { data } = await getStudents();
 
-    dispatch(fetchStudentsList(data.students));
+      dispatch(fetchStudentsList(data.students));
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        removeCookie('token');
+        removeCookie('email');
+        dispatch(logout());
+      }
+    }
   }
 
   async function findByName(event: React.FormEvent<HTMLFormElement>) {
@@ -40,7 +52,11 @@ function Students() {
 
       dispatch(fetchStudentsList(students));
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        removeCookie('token');
+        removeCookie('email');
+        dispatch(logout());
+      }
     }
   }
 
@@ -58,7 +74,11 @@ function Students() {
         dispatch(deleteOneStudent(student));
       }
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        removeCookie('token');
+        removeCookie('email');
+        dispatch(logout());
+      }
     }
   }
 
