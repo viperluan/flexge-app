@@ -7,13 +7,10 @@ import {
   useLocation,
 } from 'react-router-dom';
 
+import Error404 from './pages/404/Error404.page';
 import { Home } from './pages/Home.page';
 import { NewStudents } from './pages/new-students/NewStudents.page';
 import { Students } from './pages/students/Students.page';
-
-function NotFound() {
-  return <div>Rota não existente</div>;
-}
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   const location = useLocation();
@@ -49,7 +46,7 @@ function AppRoutes() {
           }
         />
 
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>
   );
