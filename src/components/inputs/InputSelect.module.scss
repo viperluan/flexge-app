@@ -1,20 +1,26 @@
-.inputContainer {
-  height: 40px;
-  margin-bottom: 10px;
+.container {
+  label {
+    margin-left: 20px;
+  }
 
-  border-radius: 10px;
-  border: 1px solid #6dbfb5;
-  background-color: #daedeb;
-  padding: 0 20px;
+  .inputContainer {
+    height: 40px;
+    margin-bottom: 10px;
 
-  select {
-    background-color: transparent;
-    border: none;
-    width: 100%;
-    height: 100%;
     border-radius: 10px;
-    outline: none;
-    font-size: 16px;
-    cursor: pointer;
+    border: 1px solid #6dbfb5;
+    background-color: #daedeb;
+    padding: 0 20px;
+
+    select {
+      background-color: transparent;
+      border: none;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      outline: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
   }
 }

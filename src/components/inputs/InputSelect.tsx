@@ -16,7 +16,7 @@ function InputSelect({
   setState,
 }: IInputSelectProps) {
   return (
-    <div className="container" style={{ width }}>
+    <div className={styles.container} style={{ width }}>
       <label htmlFor={htmlFor}>{label}</label>
       <div className={styles.inputContainer}>
         <select
