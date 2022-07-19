@@ -21,8 +21,11 @@ To locally preview production build, you need:
 npm run preview
 ```
 Account to use for login:
+
 email: `viperluan@gmail.com`
+
 password: `12345`
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
