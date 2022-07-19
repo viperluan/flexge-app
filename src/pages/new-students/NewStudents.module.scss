@@ -15,6 +15,11 @@
     margin-bottom: 20px;
   }
 
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
   .studentNameAndAge, .studentCourseAndSchool {
     display: flex;
     gap: 20px;
