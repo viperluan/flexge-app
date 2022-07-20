@@ -5,9 +5,10 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-body {
-  background-color: #f2f9f8;
+html, body, #root {
+  height: 100%;
 }
 
-#root{
+body {
+  background-color: #f2f9f8;
 }
